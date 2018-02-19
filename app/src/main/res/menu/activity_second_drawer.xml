@@ -5,21 +5,18 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_google"
+            android:icon="@drawable/googleg_standard_color_18"
+            android:title="@string/left_item1" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_app"
+            android:icon="@drawable/common_full_open_on_phone"
+            android:title="@string/left_item2" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_twtter"
+            android:icon="@drawable/tw__ic_logo_default"
+            android:title="@string/left_item3" />
+
     </group>
 
     <item android:title="Communicate">

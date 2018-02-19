@@ -15,6 +15,10 @@
     <string name="action_item3">Item3</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="left_item1">Google</string>
+    <string name="left_item2">App</string>
+    <string name="left_item3">Twitter</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
