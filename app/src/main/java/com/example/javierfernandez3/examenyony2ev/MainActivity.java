@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MainActivity extends AppCompatActivity {
 
     MainActivityEvents mainActivityEvents;
+
+    TwitterLoginButton loginButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityEvents mainActivityEvents= new MainActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
+
+        loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
 
     }
 }
