@@ -238,6 +238,13 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        FBCoche coche = (FBCoche) marker.getTag();
+        Log.v("SecondActivityEvents", "Pin " + coche.Nombre);
+        Log.v("SecondActivityEvents", "Pin " + coche.Marca);
+        Log.v("SecondActivityEvents", "Pin " + coche.Fabricado);
+        Log.v("SecondActivityEvents", "Pin " + coche.lat);
+        Log.v("SecondActivityEvents", "Pin " + coche.lon);
+        Snackbar.make(secondActivity.fab, "Has pulsado el pin de " + coche.Nombre, Snackbar.LENGTH_LONG).setAction("Action", null).show();
         return false;
     }
 }
