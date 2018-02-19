@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ExamenYony2Ev</string>
+
+    <!-- Acceso a Twitter -->
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">ejmwzLhnHn6w58Ia8wBRYDAdP</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">znzKGmMGaldjG0NWAtqiax3xcD0D8p42zlHkEgAXdEaZs7wjq6</string>
+
     <string name="title_activity_second">SecondActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
