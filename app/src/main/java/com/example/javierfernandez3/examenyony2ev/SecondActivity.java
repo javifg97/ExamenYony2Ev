@@ -15,14 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.javierfernandez3.examenyony2ev.FBObjects.FBCoche;
+import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.DatabaseHandler;
+import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.sqlCoche;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SecondActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    DatabaseHandler databaseHandler;
 
 
     @Override
@@ -32,6 +36,8 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
         SecondActivityEvents events=new SecondActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(events);
+
+        databaseHandler = new DatabaseHandler(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,6 +127,7 @@ class SecondActivityEvents implements FireBaseAdminListener{
 
     SecondActivity secondActivity;
     ArrayList<FBCoche> coches;
+    List<sqlCoche> cocheList;
 
     public SecondActivityEvents(SecondActivity secondActivity){
         this.secondActivity = secondActivity;
@@ -147,6 +154,13 @@ class SecondActivityEvents implements FireBaseAdminListener{
             //VALUES NO ES UN ARRAY LIST ES UN COLLECTIONS
             Log.v("coches", "COCHES CONTIENE: " + coches);
             FirebaseCrash.log("Rama descargada");
+            int cont = 0;
+            for (FBCoche coche: coches) {
+                sqlCoche cocheaux = new sqlCoche(cont,coche.Fabricado,coche.Marca,coche.Nombre,coche.lat,coche.lon);
+                this.secondActivity.databaseHandler.addContact(cocheaux);
+                cont++;
+            }
+            FirebaseCrash.log("Tabla rellenada");
 
         }
     }
