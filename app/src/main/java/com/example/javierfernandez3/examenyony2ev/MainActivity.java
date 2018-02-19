@@ -84,7 +84,7 @@ class MainActivityEvents implements FireBaseAdminListener{
     public void firebaseAdmin_loginOk(boolean blOk) {
         if(blOk){
             Log.v("loginOk","TODO CORRECTO"+blOk);
-            //ESTA PARTE DE CODIGO LO QUE HARA ES INICIAR EL SEGUNDO ACTIVITY Y FINALIZAR EL MAIN
+
             Intent intent= new Intent(mainActivity,SecondActivity.class);
             mainActivity.startActivity(intent);
             mainActivity.finish();
