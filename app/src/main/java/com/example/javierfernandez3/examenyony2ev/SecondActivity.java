@@ -17,10 +17,13 @@ import android.view.MenuItem;
 import com.example.javierfernandez3.examenyony2ev.FBObjects.FBCoche;
 import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.DatabaseHandler;
 import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.sqlCoche;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -137,6 +140,7 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
     SecondActivity secondActivity;
     ArrayList<FBCoche> coches;
     List<sqlCoche> cocheList;
+    GoogleMap mMap;
 
     public SecondActivityEvents(SecondActivity secondActivity){
         this.secondActivity = secondActivity;
@@ -184,6 +188,40 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
             FirebaseCrash.log("Select ejecutado");
 
         }
+    }
+    public void quitarPines() {
+        if (coches != null) {
+            //Log.v("coches1234","Entro en borrar");
+            for (int i = 0; i < coches.size(); i++) {
+                FBCoche cocheTemp = coches.get(i);
+                //  Log.v("coches1234","Antes del if");
+                if (cocheTemp.getMarker() != null) {
+                    //    Log.v("coches1234","No es el if");
+                    cocheTemp.getMarker().remove();
+                }
+            }
+        }
+    }
+
+    public void agregarPinesCoches() {
+
+        for (int i = 0; i < coches.size(); i++) {
+            FBCoche cocheTemp = coches.get(i);
+
+            LatLng PosTemp = new LatLng(cocheTemp.lat, cocheTemp.lon);
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(PosTemp);
+            markerOptions.title(cocheTemp.Nombre);
+            if (mMap != null) {
+                Marker marker = mMap.addMarker(markerOptions);
+                marker.setTag(cocheTemp);
+                cocheTemp.setMarker(marker);
+                if (i == 0) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PosTemp, 7));
+                }
+            }
+        }
+
     }
 
     @Override
