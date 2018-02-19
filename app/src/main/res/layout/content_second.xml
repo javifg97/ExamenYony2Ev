@@ -56,7 +56,7 @@
         android:onClick="botonLinckedClicked"/>
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/fragmentMarker"
         android:name="com.example.javierfernandez3.examenyony2ev.fragmentMarker"
         android:layout_width="0dp"
         android:layout_height="0dp"

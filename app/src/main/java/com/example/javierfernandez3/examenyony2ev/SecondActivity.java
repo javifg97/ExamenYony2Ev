@@ -41,6 +41,8 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
     FloatingActionButton fab;
 
+    fragmentMarker fragmentMarker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,8 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
         SecondActivityEvents events=new SecondActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(events);
+
+        fragmentMarker = (fragmentMarker)getSupportFragmentManager().findFragmentById(R.id.fragmentMarker);
 
         databaseHandler = new DatabaseHandler(this);
 
@@ -262,7 +266,11 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
         Log.v("SecondActivityEvents", "Pin " + coche.Fabricado);
         Log.v("SecondActivityEvents", "Pin " + coche.lat);
         Log.v("SecondActivityEvents", "Pin " + coche.lon);
-        Snackbar.make(secondActivity.fab, "Has pulsado el pin de " + coche.Nombre, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        secondActivity.fragmentMarker.txvNombre.setText(coche.Nombre);
+        secondActivity.fragmentMarker.txvMarca.setText(coche.Marca);
+        secondActivity.fragmentMarker.txvFabricado.setText(""+coche.Fabricado);
+        secondActivity.fragmentMarker.txvLat.setText(""+coche.lat);
+        secondActivity.fragmentMarker.txvLon.setText(""+coche.lon);
         return false;
     }
 }
