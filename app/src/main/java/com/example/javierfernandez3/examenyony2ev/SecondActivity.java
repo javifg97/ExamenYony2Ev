@@ -160,7 +160,7 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
     public void firebaseAdmin_ramaDescargada(String rama, DataSnapshot dataSnapshot) {
 
         if(rama.equals("Coches")) {
-
+            quitarPines();
             GenericTypeIndicator<ArrayList<FBCoche>> indicator = new GenericTypeIndicator<ArrayList<FBCoche>>() {
             };
             coches = dataSnapshot.getValue(indicator);
@@ -176,6 +176,11 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
             }
             FirebaseCrash.log("Tabla rellenada");
 
+            try {
+                agregarPinesCoches();
+            } catch (Exception e) {
+                FirebaseCrash.report(e);
+            }
 
             //cojemos todos los coches y los mostramos por la consola
             cocheList = secondActivity.databaseHandler.getAllContacts();
@@ -204,11 +209,12 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
     }
 
     public void agregarPinesCoches() {
-
+        //Por cada coche creamos un pin
         for (int i = 0; i < coches.size(); i++) {
             FBCoche cocheTemp = coches.get(i);
 
             LatLng PosTemp = new LatLng(cocheTemp.lat, cocheTemp.lon);
+            //Creamos el Marker con la posicion de cada coche y titulo el nombre del coche
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(PosTemp);
             markerOptions.title(cocheTemp.Nombre);
@@ -226,7 +232,8 @@ class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback,
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
     }
 
     @Override
