@@ -13,12 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+
 public class SecondActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        SecondActivityEvents events=new SecondActivityEvents(this);
+        DataHolder.instance.fireBaseAdmin.setListener(events);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -94,5 +102,29 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+}
+
+class SecondActivityEvents implements FireBaseAdminListener{
+
+    SecondActivity secondActivity;
+
+    public SecondActivityEvents(SecondActivity secondActivity){
+        this.secondActivity = secondActivity;
+    }
+
+    @Override
+    public void firebaseAdmin_registerOk(boolean blOk) {
+
+    }
+
+    @Override
+    public void firebaseAdmin_loginOk(boolean blOk) {
+
+    }
+
+    @Override
+    public void firebaseAdmin_ramaDescargada(String rama, DataSnapshot dataSnapshot) {
+
     }
 }

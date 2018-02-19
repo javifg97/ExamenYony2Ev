@@ -18,7 +18,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    MainActivityEvents mainActivityEvents;
+
 
     TwitterLoginButton loginButton;
     //este contexto lo utilizamos en el login de firebase con credenciales
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    //Desde Aqui le pasamos los resultados del login al
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
