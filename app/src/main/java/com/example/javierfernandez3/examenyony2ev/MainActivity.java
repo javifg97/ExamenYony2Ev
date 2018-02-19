@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         //Vinculamos el boton de Twitter y le seteamos el callback que es donde ira
         //cuando haga el login
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
-        try {
+
             loginButton.setCallback(new Callback<TwitterSession>() {
                 @Override
                 public void success(Result<TwitterSession> result) {
@@ -58,13 +58,17 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void failure(TwitterException exception) {
-                    // Do something on failure
+                    Log.v("ERROR","MAL CALLBACK");
                 }
             });
-        }catch (Exception e){
-            FirebaseCrash.report(e);
-        }
 
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Pass the activity result to the login button.
+        loginButton.onActivityResult(requestCode, resultCode, data);
     }
 }
 class MainActivityEvents implements FireBaseAdminListener{
