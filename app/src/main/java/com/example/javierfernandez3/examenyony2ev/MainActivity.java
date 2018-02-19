@@ -15,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActivityEvents mainActivityEvents= new MainActivityEvents(this);
+        DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
+
     }
 }
 class MainActivityEvents implements FireBaseAdminListener{
