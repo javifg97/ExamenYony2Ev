@@ -32,4 +32,4 @@ dependencies {
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.firebase:firebase-crash:11.8.0'
 }
-compile 'com.google.firebase:firebase-crash:11.8.0'
+apply plugin: 'com.google.gms.google-services'
