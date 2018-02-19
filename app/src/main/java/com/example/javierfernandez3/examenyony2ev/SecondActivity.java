@@ -155,12 +155,24 @@ class SecondActivityEvents implements FireBaseAdminListener{
             Log.v("coches", "COCHES CONTIENE: " + coches);
             FirebaseCrash.log("Rama descargada");
             int cont = 0;
+            //Por cada coche hacemos un addContacto que hace un insert a la tabla.
             for (FBCoche coche: coches) {
                 sqlCoche cocheaux = new sqlCoche(cont,coche.Fabricado,coche.Marca,coche.Nombre,coche.lat,coche.lon);
                 this.secondActivity.databaseHandler.addContact(cocheaux);
                 cont++;
             }
             FirebaseCrash.log("Tabla rellenada");
+
+
+            //cojemos todos los coches y los mostramos por la consola
+            cocheList = secondActivity.databaseHandler.getAllContacts();
+
+            for (sqlCoche coche: cocheList) {
+                Log.v("SQLDDBB","FABRICADO----->"+coche.getFabricado());
+                Log.v("SQLDDBB","MARCA----->"+coche.getMarca());
+                Log.v("SQLDDBB","NOMBRE----->"+coche.getNombre());
+            }
+            FirebaseCrash.log("Select ejecutado");
 
         }
     }

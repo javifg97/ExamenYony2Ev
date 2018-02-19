@@ -16,7 +16,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "vehiculos";
