@@ -17,6 +17,10 @@ import android.view.MenuItem;
 import com.example.javierfernandez3.examenyony2ev.FBObjects.FBCoche;
 import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.DatabaseHandler;
 import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.sqlCoche;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.GenericTypeIndicator;
@@ -27,7 +31,10 @@ import java.util.List;
 public class SecondActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DatabaseHandler databaseHandler;
+    DrawerLayout drawer;
+    SupportMapFragment mapFragment;
 
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +46,13 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
         databaseHandler = new DatabaseHandler(this);
 
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMapa);
+        mapFragment.getMapAsync(events);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +60,7 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -67,8 +77,7 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -123,7 +132,7 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
     }
 }
 
-class SecondActivityEvents implements FireBaseAdminListener{
+class SecondActivityEvents implements FireBaseAdminListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     SecondActivity secondActivity;
     ArrayList<FBCoche> coches;
@@ -175,5 +184,15 @@ class SecondActivityEvents implements FireBaseAdminListener{
             FirebaseCrash.log("Select ejecutado");
 
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }
