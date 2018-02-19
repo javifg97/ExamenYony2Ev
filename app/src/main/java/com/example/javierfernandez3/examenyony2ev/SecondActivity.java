@@ -102,7 +102,11 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_item1) {
+            return true;
+        } else if (id == R.id.action_item2) {
+            return true;
+        } else if (id == R.id.action_item3) {
             return true;
         }
 
