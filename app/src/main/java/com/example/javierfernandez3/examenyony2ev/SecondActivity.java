@@ -78,6 +78,15 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         }
     }
 
+    public void botonLinckedClicked(View v) {
+        if (v.getId() == R.id.btnLinked1) {
+            Log.v("MetodoLink", "Has pulsado el boton linked 1");
+        } else if (v.getId() == R.id.btnLinked2) {
+            Log.v("MetodoLink", "Has pulsado el boton linked 2");
+        }
+
+    }
+
     @Override
     public void onBackPressed() {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
