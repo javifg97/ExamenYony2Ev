@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.example.javierfernandez3.examenyony2ev.FBObjects.FBCoche;
 import com.example.javierfernandez3.examenyony2ev.sqlLiteAdmin.DatabaseHandler;
@@ -36,6 +37,7 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
     DatabaseHandler databaseHandler;
     DrawerLayout drawer;
     SupportMapFragment mapFragment;
+    Button btnLinked1, btnLinked2;
 
     FloatingActionButton fab;
 
@@ -54,6 +56,9 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        btnLinked1 = findViewById(R.id.btnLinked1);
+        btnLinked2 = findViewById(R.id.btnLinked2);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         //Vinculamos el boton de Twitter y le seteamos el callback que es donde ira
         //cuando haga el login
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
-
+        try {
             loginButton.setCallback(new Callback<TwitterSession>() {
                 @Override
                 public void success(Result<TwitterSession> result) {
@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.v("ERROR","MAL CALLBACK");
                 }
             });
+    }catch (Exception e){
+        FirebaseCrash.report(e);
+    }
 
         btnTwAnim = AnimationUtils.loadAnimation(this,R.anim.tw_anim);
         loginButton.startAnimation(btnTwAnim);
