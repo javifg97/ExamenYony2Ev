@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.TwitterAuthProvider;
@@ -18,13 +20,11 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     TwitterLoginButton loginButton;
     //este contexto lo utilizamos en el login de firebase con credenciales
     MainActivity context = this;
 
-
+    Animation btnTwAnim;
 
 
     @Override
@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.v("ERROR","MAL CALLBACK");
                 }
             });
+
+        btnTwAnim = AnimationUtils.loadAnimation(this,R.anim.tw_anim);
+        loginButton.startAnimation(btnTwAnim);
 
 
     }
