@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     MainActivityEvents mainActivityEvents;
 
     TwitterLoginButton loginButton;
+    //este contexto lo utilizamos en el login de firebase con credenciales
     MainActivity context = this;
 
 
@@ -46,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
                     //Hacemos unos credenciales ya que el metodo de firebase nos los pide y le pasamos los de twitter
 
-
+                    AuthCredential credential = TwitterAuthProvider.getCredential(
+                            result.data.getAuthToken().token,
+                            result.data.getAuthToken().secret);
+                    DataHolder.instance.fireBaseAdmin.Twitter(credential, context);
 
 
                 }

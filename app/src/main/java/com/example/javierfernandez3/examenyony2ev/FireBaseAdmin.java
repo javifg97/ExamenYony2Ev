@@ -37,7 +37,8 @@ public class FireBaseAdmin {
     public void setListener(FireBaseAdminListener listener) {
         this.listener = listener;
     }
-
+    //En este metodo creamos un inicio de sesion con firebase usando credenciales los
+    //cuales nos los dará twitter.
     public  void Twitter(AuthCredential credential, Activity activity){
         mAuth.signInWithCredential(credential).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
