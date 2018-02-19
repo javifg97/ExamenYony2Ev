@@ -3,6 +3,7 @@ package com.example.javierfernandez3.examenyony2ev;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.javierfernandez3.examenyony2ev.FBObjects.FBCoche;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.GenericTypeIndicator;
+
+import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,6 +51,12 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        try {
+            DataHolder.instance.fireBaseAdmin.descargarYObservarRama("Coches");
+        }catch (Exception e){
+            FirebaseCrash.report(e);
+        }
     }
 
     @Override
@@ -108,6 +120,7 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
 class SecondActivityEvents implements FireBaseAdminListener{
 
     SecondActivity secondActivity;
+    ArrayList<FBCoche> coches;
 
     public SecondActivityEvents(SecondActivity secondActivity){
         this.secondActivity = secondActivity;
@@ -126,5 +139,15 @@ class SecondActivityEvents implements FireBaseAdminListener{
     @Override
     public void firebaseAdmin_ramaDescargada(String rama, DataSnapshot dataSnapshot) {
 
+        if(rama.equals("Coches")) {
+
+            GenericTypeIndicator<ArrayList<FBCoche>> indicator = new GenericTypeIndicator<ArrayList<FBCoche>>() {
+            };
+            coches = dataSnapshot.getValue(indicator);
+            //VALUES NO ES UN ARRAY LIST ES UN COLLECTIONS
+            Log.v("coches", "COCHES CONTIENE: " + coches);
+            FirebaseCrash.log("Rama descargada");
+
+        }
     }
 }
