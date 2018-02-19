@@ -5,7 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.TwitterAuthProvider;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     MainActivityEvents mainActivityEvents;
 
     TwitterLoginButton loginButton;
+    MainActivity context = this;
+
 
 
 
@@ -24,7 +33,31 @@ public class MainActivity extends AppCompatActivity {
         MainActivityEvents mainActivityEvents= new MainActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
 
+        //Vinculamos el boton de Twitter y le seteamos el callback que es donde ira
+        //cuando haga el login
         loginButton = (TwitterLoginButton) findViewById(R.id.login_button);
+        try {
+            loginButton.setCallback(new Callback<TwitterSession>() {
+                @Override
+                public void success(Result<TwitterSession> result) {
+                    Log.v("HEY", "--------------->>>>>>>>>>>>>   " + result.data.getUserName());
+
+                    //Hacemos unos credenciales ya que el metodo de firebase nos los pide y le pasamos los de twitter
+
+
+
+
+                }
+
+
+                @Override
+                public void failure(TwitterException exception) {
+                    // Do something on failure
+                }
+            });
+        }catch (Exception e){
+            FirebaseCrash.report(e);
+        }
 
     }
 }
